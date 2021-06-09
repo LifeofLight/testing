@@ -3,7 +3,7 @@ from fastapi.param_functions import Depends
 
 app =FastAPI()
 @app.get('/tax')
-def tax(income:int=170 , disabilities:int=50,coupple:int=0,parents:int=1,chile:int=1,agepF:int=20,agepM:int=20,income_pF:int=200,income_pM:int=200,income_c:int=0):
+def tax(income:int=50000, disabilities:int=0,coupple:int=0,parents:int=1,chile:int=1,agepF:int=60,agepM:int=55,income_pF:int=200,income_pM:int=200,income_c:int=0):
     income_pF=income_pF*12
     income_pM=income_pM*12
     income_p=[income_pF,income_pM]
@@ -15,9 +15,11 @@ def tax(income:int=170 , disabilities:int=50,coupple:int=0,parents:int=1,chile:i
 
 
     return{'tax':tax}
+
 def decresstex(money_Per_Year,disabilities,parents,agep,income_p,coupple,income_c,chile):
     money_Per_Year=money_Per_Year-60000
     count=0
+    j=0
     if(disabilities==1):
         money_Per_Year=money_Per_Year-60000
     if coupple==1&income_c==0:
@@ -27,10 +29,11 @@ def decresstex(money_Per_Year,disabilities,parents,agep,income_p,coupple,income_
     elif chile>=2:
         money_Per_Year=money_Per_Year-(60000*chile)
     if parents==1:
-        for i in 10:
-            if agep[i]>=60:
-                if income_p[i]<=30000:
+        for i in agep:
+            if i>=60:
+                if income_p[j]<=30000:
                     count=count+1
+            j=j+1
     money_Per_Year=money_Per_Year-30000*count
 
     return money_Per_Year
