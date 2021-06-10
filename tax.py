@@ -14,7 +14,7 @@ def tax(income:int=50000, disabilities:int=0,coupple:int=0,parents:int=1,chile:i
     tax =caltax(money_Per_Year)
 
 
-    return{'tax':tax}
+    return{'tax':tax,'money_Per_Year':money_Per_Year}
 
 def decresstex(money_Per_Year,disabilities,parents,agep,income_p,coupple,income_c,chile):
     money_Per_Year=money_Per_Year-60000
